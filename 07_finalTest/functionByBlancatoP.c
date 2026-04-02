@@ -110,8 +110,6 @@ void addQuantity(Product products[], int countProduct)
     printf("Update Successful -> Code: %d, Name: %s, New Quantity: %d\n\n", products[index].id, products[index].name, products[index].quantity);
 }
 
-
-
 // N10 - By Pierfrancesco Blancato
 void countProductForCategory(Product products[], int countProduct)
 {
