@@ -34,20 +34,8 @@ int readInt(const char prompt[]){
     }
 }
 // By Pierfrancesco Blancato
-float readFloat(const char prompt[])
-{
-    float value;
-    while (1){
-        printf("%s", prompt);
-
-        if (scanf("%f", &value) == 1){
-            return value;
-        }
-
-        int c;
-        while ((c = getchar()) != '\n' && c != EOF){}
-        printf("Input not valid. Insert a real number.\n");
-    }
+float intToFloat(int value){
+    return (float)value/100;
 }
 // By Pierfrancesco Blancato
 int readRange(const char prompt[], int min_value, int max_value)
@@ -108,18 +96,6 @@ void printAllProducts(Product products[], int countProduct){
     printf("+-----+----------------------+-----------------+--------------+----------+------------+------------+------------+\n");
 }
 
-// Mock function to test addQuantity (da rimuovere quando marco la farà)
-int searchProduct(Product products[], int countProduct){
-    int searchId = readInt("Enter the Product Code (ID) to search: ");
-    for (int i = 0; i < countProduct; i++){
-        
-        if (products[i].id == searchId){
-            return i; // Return index if product is found
-        }
-    }
-    return -1; // Return -1 if not found
-}
-
 // N5 - By Pierfrancesco Blancato
 void addQuantity(Product products[], int countProduct)
 {
@@ -145,12 +121,18 @@ void countProductForCategory(Product products[], int countProduct){
         return;
     }
     char searchCategory[50];
-    printf("Enter the category you wish to search:: ");
+    printf("Enter the category you wish to search: ");
     scanf("%49s", &searchCategory);
     int counter = 0;
 
-    for (int i = 0; i <= countProduct; i++){
+    // Iterates through the array, checking each individual product
+    for (int i = 0; i < countProduct; i++){ 
+        
+        // The strcmp function compares the current product's category with the searched one.
+        // If it returns 0, it means the two strings are exactly identical.
         if (strcmp(products[i].category, searchCategory) == 0){
+            
+            // Match found: increment the product counter by 1
             counter++;
         }
     }
