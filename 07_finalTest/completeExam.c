@@ -160,32 +160,29 @@ int addProduct(Product products[], int position)
 }
 
 // N2 - By Pierfrancesco Blancato - Show all products in the warehouse
-void printAllProducts(Product products[], int countProduct)
-{
-    if (countProduct == 0)
-    {
+void printAllProducts(Product products[], int countProduct){
+    if (countProduct == 0){
         printf("No products available.\n");
         return;
-    }
-
+        }
     printf("+-----+----------------------+-----------------+--------------+----------+------------+------------+------------+\n");
     printf("| Cod | Name                 | Brand           | Cat          | Price    | Qty Avail. | Warr. (Mo) | Status     |\n");
     printf("+-----+----------------------+-----------------+--------------+----------+------------+------------+------------+\n");
 
-    for (int i = 0; i < countProduct; i++)
-    {
+    for (int i = 0; i < countProduct; i++){
         printf("| %-3d | %-20s | %-15s | %-12s | %-8.2f | %-10d | %-10d | %-10s |\n",
-               products[i].id,
-               products[i].name,
-               products[i].brand,
-               products[i].category,
-               products[i].price,
-               products[i].quantity,
-               products[i].warranty,
-               products[i].status ? "Avb" : "Not Avb.");
+        products[i].id,
+        products[i].name,
+        products[i].brand,
+        products[i].category,
+        products[i].price,
+        products[i].quantity,
+        products[i].warranty,
+        products[i].status ? "Avb" : "Not Avb.");
     }
     printf("+-----+----------------------+-----------------+--------------+----------+------------+------------+------------+\n");
 }
+
 
 // N3 - By Marco Ventimiglia - Search for a product by code
 int searchProduct(Product products[], int countProduct, int searchCode)
@@ -484,21 +481,18 @@ void calculateAveragePrice(Product products[], int countProduct)
         return;
     }
 
-    float sumTotalPrice = 0;
+    // Conta il totale degli item per la media pesata
     int numberOfItems = 0;
-
     for (int i = 0; i < countProduct; i++)
-    {
-        sumTotalPrice += products[i].price * products[i].quantity;
         numberOfItems += products[i].quantity;
-    }
 
     if (numberOfItems == 0)
     {
-        printf("\nNo items in the warehouse. Average price cannot be calculated.\n");
+        printf("\nNo items in stock. Average price cannot be calculated.\n");
         return;
     }
 
+    float sumTotalPrice = calculateTotalValue(products, countProduct);
     float averagePrice = sumTotalPrice / numberOfItems;
 
     printf("\nThe average price of items in the warehouse is: %.2f\n", averagePrice);
